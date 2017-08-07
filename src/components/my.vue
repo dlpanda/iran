@@ -1,9 +1,7 @@
 <template>
 	<div>
 		
-		results
-		<router-view>
-		</router-view>
+		my
 	</div>
 </template>
 

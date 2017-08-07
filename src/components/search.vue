@@ -1,7 +1,7 @@
 <template>
 	<div>
 		
-		results
+		search
 		<router-view>
 		</router-view>
 	</div>

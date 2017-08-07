@@ -35,7 +35,20 @@ module.exports = {
         options: {
           name: '[name].[ext]?[hash]'
         }
-      }
+      },
+       {
+        test: /\.css$/,
+        loader: 'style-loader!css-loader'//添加对样式表的处理,内联样式
+      },
+
+    {
+        test: /\.(eot|svg|ttf|woff|woff2)(\?\S*)?$/,
+        loader: 'file-loader',
+        options: {
+          name: 'fonts/[name].[ext]?[hash]'
+        }
+      },
+
     ]
   },
   resolve: {
@@ -45,12 +58,25 @@ module.exports = {
   },
   devServer: {
     historyApiFallback: true,
-    noInfo: true
+    noInfo: true,
+    proxy: {
+          '/api/executions': {
+              target: 'http://iranshao.com',
+              host: 'iranshao.com',
+              changeOrigin:true
+          }
+    }
   },
   performance: {
     hints: false
   },
-  devtool: '#eval-source-map'
+  devtool: '#eval-source-map',
+  plugins:[
+    new webpack.ProvidePlugin({
+        axios: 'axios'
+          //各个模块都可以使用axios
+    })
+  ]
 }
 
 if (process.env.NODE_ENV === 'production') {
