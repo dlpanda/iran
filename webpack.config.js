@@ -60,9 +60,9 @@ module.exports = {
     historyApiFallback: true,
     noInfo: true,
     proxy: {
-          '/api/executions': {
-              target: 'http://iranshao.com',
-              host: 'iranshao.com',
+          '/api/*': {
+              target: 'http://10.2.154.235:4000',
+              host: '10.2.154.235:4000',
               changeOrigin:true
           }
     }

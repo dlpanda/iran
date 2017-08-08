@@ -1,9 +1,9 @@
 <template>
   <div id="app">
-  	<span :class="isLeftShow?'grey':'transparent'" @click="isLeftShow=!isLeftShow"></span>
+  	<span :class="isLeftShow?'grey cover':'transparent cover'" @click="isLeftShow=!isLeftShow"></span>
   	<header>
   		<i class="left" @click="isLeftShow=!isLeftShow">目</i>
-  		<img src="http://assets.iranshao.com/src/images/logo-text.9660dcc0e5373b1a27e84bbda7cde28c.jpg"/>
+  		<img src="http://assets.iranshao.com/src/images/logo-text.9660dcc0e5373b1a27e84bbda7cde28c.jpg" id="title"/>
   	</header>
   	<xia-cover v-if="isLeftShow" direction="moveltor">
 	  	<nav>
@@ -28,10 +28,44 @@
 	  </xia-cover>
 	<div id="swiper">
 		<swipe class="my-swipe">
-		    <swipe-item class="slide1">1</swipe-item>
-  			<swipe-item class="slide2">2</swipe-item>
-  			<swipe-item class="slide3">3</swipe-item>
+			<swipe-item v-for="(data,index) in looplist" :key="data.url">
+				<img :src="data.cover"/>
+			</swipe-item>
 		</swipe>
+	</div>
+	<div id="button">
+		<ul>
+			<router-link to="/races" tag="li" activeClass="active">
+				<img src="http://assets.iranshao.com/src/images/home-race.ac2bb899ef395473fe2c3d788f102537.png"/>
+			</router-link>
+			<router-link to="/races" tag="li" activeClass="active">
+				<img src="http://assets.iranshao.com/src/images/home-reg.c106bf350f433016ed482ded49984b4c.png"/>
+			</router-link>
+			<router-link to="/results" tag="li" activeClass="active">
+				<img src="http://assets.iranshao.com/src/images/home-result.c66cf0db723d31e14734717a0b3ee625.png"/>
+			</router-link>
+		</ul>
+	</div>
+	<div id="introM">
+		<h2>推荐比赛</h2>
+		<ul>
+			<li v-for="(data,index) in datalist" :key="data.id" @click="handleClick(data.id)">
+				<img :src="data.cover"/>
+				<div class="right_container">
+					<h3>{{data.name}}</h3>
+					<p><span>{{data.start_date}}</span><span>{{data.location}}</span></p>
+					<div class="focus">
+						<i>♥</i><span class="follows">{{data.follows_count}}</span>
+					</div>
+					<div class="tags">
+						<span v-bind:style="{'display':data.has_photos?'inline-block':'none'}">照片</span>
+						<span v-bind:style="{'display':data.has_results?'inline-block':'none'}">成绩</span>
+						<span v-bind:style="{'display':data.is_reging?'inline-block':'none'}">报名中</span>
+						<span v-bind:style="{'display':data.is_reging?'inline-block':'none'}">一键报名</span>
+					</div>
+				</div>
+			</li>
+		</ul>
 	</div>
   </div>
 </template>
@@ -55,16 +89,25 @@ export default {
   data(){
   	return{
   		isLeftShow:false,
-  		looplist:[]
+  		looplist:[],
+  		datalist:[]
   	} 
   },
   components:{
   	"xia-cover":child,
   },
+  methods:{
+  	handleClick(id){
+  		console.log(id);
+  		router.push({name:"races",params:{pageId:id}})
+  	}
+  },
   mounted(){
-  	axios.get("").then(res=>{
-
-  	})
+  	axios.get("/api/all").then(res=>{
+  		this.looplist=res.data.data.carousels,
+  		this.datalist=res.data.data.races
+  	}
+  	)
   }
 }
 </script>
@@ -89,7 +132,7 @@ ul{
 	list-style:none;
 }
 #app{
-	span{
+	.cover{
 		height:100%;
 		width:100%;
 		opacity:0.5;
@@ -104,12 +147,14 @@ ul{
 		display:none;
 	}
 	header{
+		background-color:white;
 		height:px2rem(50px);
 		position:fixed;
 		top:0px;
 		width:100%;
 		left:0px;
 		line-height:px2rem(50px);
+		z-index:2;
 		.left{
 			font-size:12px;
 			float:left;
@@ -121,6 +166,7 @@ ul{
 			margin-right:px2rem(-42px);
 			width:px2rem(84px);
 			margin-top:px2rem(13px);
+			display:block;
 		}
 	}
 	nav{
@@ -180,10 +226,116 @@ ul{
 		}
 	}
 	#swiper{
+		padding-top:px2rem(50px);
 		.my-swipe{
-			height:100px;
+			z-index:1;
+			height:px2rem(160px);
+			img{
+				height:px2rem(160px);
+				width:100%;
+			}
 		}
 	}
+	#button{
+		height:px2rem(96px);
+		ul{
+			height:px2rem(96px);
+			padding:px2rem(8px) 0;
+			li{
+				
+				width:px2rem(120px);
+				float:left;
+				height:px2rem(80px);
+				img{
+					width:px2rem(120px);
+					display:block;
+				}
+			}
+			li:nth-of-type(2){
+				margin-left:px2rem(7px);
+				margin-right:px2rem(7px);
+			}
+		}
+	}
+	#introM{
+		h2{
+			padding-left:px2rem(16px);
+			font-size:px2rem(18px);
+			height:px2rem(68px);
+			line-height:px2rem(68px);
+		}
+		ul{
+			li{
+				height:px2rem(120px);
+				background-color:white;
+				width:100%;
+				img{
+					margin-left:px2rem(16px);
+					margin-top:px2rem(20px);
+					height:px2rem(60px);
+					width:px2rem(60px);
+					float:left;
+				}
+				.right_container{
+					float:left;
+					margin-top:px2rem(20px);
+					width:px2rem(250px);
+					margin-left:px2rem(10px);
+					h3{
+						line-height:px2rem(28px);
+						font-size:px2rem(16px);
+						height:px2rem(28px);
+						width:100%;
+						white-space:nowrap; 
+						overflow:hidden; 
+						text-overflow:ellipsis;
+					}
+					p{
+						width:100%;
+						height:px2rem(20px);
+						line-height:px2rem(20px);
+						font-size:12px;
+						color:#b6b6b6;
+						white-space:nowrap; 
+						overflow:hidden; 
+						text-overflow:ellipsis;
+						span:first-child{
+							padding-right:px2rem(14px);
+						}
+					}
+				.focus{
+					color:#dcdddd;
+					height:px2rem(22px);
+					line-height:px2rem(22px);
+					font-size:12px;
+					i{
+
+					}
+					span{
+						
+					}
+				}
+				.tags{
+					span{
+						float:left;
+						margin-right:px2rem(4px);
+						border-radius:px2rem(8px);
+						height:px2rem(16px);
+						line-height:px2rem(16px);
+						font-size:12px;
+						background-color:#ebeff1;
+						color:#4a5a7c;
+						padding:0 px2rem(8px);
+					}
+					span:nth-last-child(1){
+						background-color:#ffeae0;
+						color:#ff611a;
+					}
+				}
+			}
+		}
+	}
+}
 }
 
     .moveltor-enter-active{

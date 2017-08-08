@@ -22,4 +22,7 @@
 html{
 	font-size:100px;
 }
+ul{
+	list-style:none;
+}
 </style>
