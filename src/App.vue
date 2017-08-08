@@ -13,7 +13,6 @@
 	}
 </script>
 
-
 <style lang="scss">
 *{
 	padding:0;
