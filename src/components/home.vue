@@ -71,11 +71,13 @@
 </template>
 
 <script>
+
 import { Swipe, SwipeItem } from 'vue-swipe';
 import 'vue-swipe/dist/vue-swipe.css';
 import Vue from 'vue';
 Vue.component('swipe', Swipe);
 Vue.component('swipe-item', SwipeItem);
+
 var child={
 	template:`
                 <transition :name="direction">
@@ -95,12 +97,14 @@ export default {
   },
   components:{
   	"xia-cover":child,
+
   },
   methods:{
   	handleClick(id){
   		console.log(id);
   		router.push({name:"races",params:{pageId:id}})
-  	}
+  	},
+
   },
   mounted(){
   	axios.get("/api/all").then(res=>{
