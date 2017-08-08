@@ -33,13 +33,20 @@
 
 <script>
 	export default{
-		 data(){
+		data(){
 		    //在组件化开发中 data必须势函数， 返回值才是我们定义的所有状态值
 		    return {
 		      currentview:'home'
 		    }
-		  },
-		  methods:{
+		 },
+		mounted(){
+			//生命周期请求数据
+			// axios.get("/v4/api/billboard/home").then(res=>{
+			// 	console.log(res.data);
+			// 	this.looplist = res.data.data.billboards
+			// })
+		},
+		methods:{
 		    getTel(){
 		    	var telVal = document.getElementById("te").value;
 		        console.log(telVal+1);
@@ -52,7 +59,7 @@
             		console.log("合格");
             	}
        		}
-		  }
+		 }
 	}
 </script>
 

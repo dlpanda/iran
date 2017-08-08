@@ -33,6 +33,7 @@
   			<swipe-item class="slide3">3</swipe-item>
 		</swipe>
 	</div>
+	<div></div>
   </div>
 </template>
 
