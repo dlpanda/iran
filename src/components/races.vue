@@ -180,10 +180,62 @@
 <script>
 window.onload = function(){
 	var btn = document.getElementById("bardRemove");
+	var btn1 = document.getElementById("bardClassify");
+	var btn2 = document.getElementById("bardNo");
+	var btn3 = document.getElementById("bardDi");
+	var btn4 = document.getElementById("bardLie");
+	var click5 = document.getElementById("bardEnroll");
+	var click4 = document.getElementById("bardMap");
+	var click3 = document.getElementById("bardData");
+	var click2 = document.getElementById("bardSorted");
 	var click1 = document.getElementById("bardInput");
 	click1.onclick = function(){
 		btn.style.display="inline-block";
 	}	
+	click2.onclick = function(){
+		btn1.style.display="block";
+		btn1.style.zIndex=100;
+		btn2.style.display="none";
+		btn3.style.display="none";
+		btn4.style.display="none";
+		btn2.style.zIndex=10;
+		btn3.style.zIndex=10;
+		btn4.style.zIndex=10;
+
+	}
+	click3.onclick = function(){
+		btn2.style.display="block";
+		btn2.style.zIndex=100;
+		btn1.style.display="none";
+		btn3.style.display="none";
+		btn4.style.display="none";
+		btn1.style.zIndex=10;
+		btn3.style.zIndex=10;
+		btn4.style.zIndex=10;
+
+	}
+	click4.onclick = function(){
+		btn3.style.display="block";
+		btn3.style.zIndex=100;
+		btn2.style.display="none";
+		btn1.style.display="none";
+		btn4.style.display="none";
+		btn2.style.zIndex=10;
+		btn1.style.zIndex=10;
+		btn4.style.zIndex=10;
+
+	}
+	click5.onclick = function(){
+		btn4.style.display="block";
+		btn4.style.zIndex=100;
+		btn2.style.display="none";
+		btn3.style.display="none";
+		btn1.style.display="none";
+		btn2.style.zIndex=10;
+		btn3.style.zIndex=10;
+		btn1.style.zIndex=10;
+
+	}
 }
 
 
@@ -268,11 +320,14 @@ $ui-width: 750px;
 	#bardClassify{
 		position:absolute;
 		background:#fff;
-		z-index: 10;
+		z-index: 100;
 		width:100%;
 		display:none;
-		
-		
+		div{
+			
+			padding: px2rem(10px);
+			border: 1px solid #ccc;				
+			}
 
 	}
 	#bardNo{
@@ -337,6 +392,10 @@ $ui-width: 750px;
 	#bardDi{
 		position:absolute;
 		z-index: 10;
+		background:#fff;
+		z-index: 10;
+		width:100%;
+		height: px2rem(200px);
 		#bardClass{
 			display:flex;
 			width:100%;
@@ -381,6 +440,13 @@ $ui-width: 750px;
 	#bardLie{
 		position:absolute;
 		display:none;
+		background:#fff;
+		width:100%;
+		div{
+			
+			padding: px2rem(10px);
+			border: 1px solid #ccc;				
+			}
 		
 	}
 }
