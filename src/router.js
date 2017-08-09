@@ -18,34 +18,15 @@ Vue.use(VueRouter); //安装路由功能
 //
 const routes = [
   { path:'/', redirect:'/home'},
-  { path:'/races', component:Races,
-	children:[
-		{
-			path:'/races/:pageId',name:"races",component:RaceDetail
-		}
-	]},
+  { path:'/races', component:Races},
   { path:'/login', component:Login},
-  { path:'/results', component:Results,
-  children:[
-  {
-  	path:'albums',component:Albums
-  },
-  {
-  	path:'search',component:Search,
-	children:[
-	{
-		path:'code',component:SearchCode
-	},
-	{
-		path:'athletes',component:SearchAthletes
-	}
-	]
-}
-  ]
-},
+  { path:'/races/111',component:RaceDetail},
+  { path:'/results', component:Results},
+  { path:'/results/albums',component:Albums},
+  { path:'/results/search/athletes',component:SearchAthletes},
+  { path:'/results/search/code',component:SearchCode},
   { path:'/home',component:Home},
-  
-	{ path:'/my',component:My}
+  { path:'/my',component:My}
 ]
 
 const router = new VueRouter({
