@@ -186,7 +186,7 @@
 			
 		</nav>
 		<div id="barddivsting">
-			<div class="bardFotter" v-for="(item,index) in bardlooplist" :key="index">
+			<div class="bardFotter" v-for="(item,index) in bardlooplist" :key="index" @click="myhandleClick(item.id)">
 				<img :src=item.cover class="bardone"/>
 				
 				<div class="bardOne">
@@ -206,6 +206,7 @@
 
 
 <script>
+import router from "../router";
 
 window.onload = function(){
 	var btn = document.getElementById("bardRemove");
@@ -361,10 +362,23 @@ var child={
   	"xia-cover":child,
   },
   mounted(){
-  	axios.get("/api/listxiangqing?"+this.bardlooplist.id).then(res=>{
+  	axios.get(`/api/listxiangqing?id${this.$route.params.myid}`).then(res=>{
+  		console.log(res.data.races);
   			this.bardlooplist=res.data.races
   	})
-  }	
+  },
+  methods:{
+
+	myhandleClick(id){
+		console.log(id);
+		//通过js 方式 进行(单页面)页面跳转
+		//通过路径跳转
+		// router.push(`/races/${this.$route.params.myid}/briefs`); 
+		// 
+		// 通过名字找到组件进行跳转。
+		router.push({name:"detail",params:{ myid: id }})
+	}
+}	
 }
 </script>
 
