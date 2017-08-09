@@ -32,7 +32,7 @@
 			<div class="file">
 				<input type="file">
 			</div>
-			<input type="button" id="click" value="更多">
+			<input type="button" id="click" value="更新">
 		</main>
 	</div>
 </template>

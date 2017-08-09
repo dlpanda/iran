@@ -64,6 +64,11 @@ module.exports = {
               target: 'http://iranshao.com',
               host: 'iranshao.com',
               changeOrigin:true
+          },
+          '/users/*':{
+              target:'http://10.2.154.53:3000',
+              host:'10.2.154.53:3000',
+              changeOrigin:true
           }
     }
   },
